@@ -1,0 +1,6 @@
+local:
+  sessions:
+    default:
+      hosts:
+        - localhost:27017
+      database: meshigoyomi_local
