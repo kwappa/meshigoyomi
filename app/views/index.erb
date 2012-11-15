@@ -1,0 +1,28 @@
+<%= partial 'partials/page_top' %>
+
+<div class="row">
+  <div class="six columns top-button">
+    <form action="/user/login", method="POST">
+      <input type="submit" class="large round login-user button" value="ログイン"></input>
+      <div class="row">
+        <div class="two columns">
+          <label class="right inline">Username</label>
+        </div>
+        <div class="ten columns">
+          <input type="text" name="user_rname">
+        </div>
+      </div>
+      <div class="row">
+        <div class="two columns">
+          <label class="right inline">Password</label>
+        </div>
+        <div class="ten columns">
+          <input type="password" name="password">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="six columns top-button">
+    <a href="/user/new" class="large round register-user button">新規登録</a>
+  </div>
+</div>

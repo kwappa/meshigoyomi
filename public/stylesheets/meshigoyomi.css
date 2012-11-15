@@ -1,0 +1,16 @@
+div.main-title,top-button {
+    text-align: center ;
+}
+a.button, input.button {
+    text-shadow: 1px 1px 4px black ;
+}
+
+div.top-button {
+    text-align: center ;
+}
+.login-user.button {
+    margin-bottom: 32px ;
+}
+.register-user.button {
+    background-color: limegreen ;
+}
