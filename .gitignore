@@ -6,4 +6,4 @@ vendor/*
 .sass-cache/*
 .bundle/*
 config/database.yml
-
+public/images/tupper/*

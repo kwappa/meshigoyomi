@@ -1,0 +1,31 @@
+<%= partial 'partials/page_top' %>
+<div class="row">
+  <form action="<%= url :dishes, :new %>" method="POST">
+    <div class="row">
+      <div class="four columns"><label class="right inline">タイトル</label></div>
+      <div class="eight columns">
+        <%= h params['title'] %>
+        <input type="hidden" name="title" value="<%= params['title'] %>"></input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"><label class="right inline">詳細</label></div>
+      <div class="eight columns">
+        <%= h params['description'] %>
+        <input type="hidden" name="description" value="<%= h params['description'] %>"></input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"><label class="right inline">写真</label></div>
+      <div class="eight columns">
+        <img src="<%= preview_url %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"></div>
+      <div class="eight columns">
+        <input type="submit" class="large round register-user button" value="あたらしいごはんを登録"></input>
+      </div>
+    </div>
+  </form>
+</form>
