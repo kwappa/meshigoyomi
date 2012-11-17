@@ -3,6 +3,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_many :dishes
+
   field :user_name,         type: String
   field :screen_name,       type: String
   field :mail_address,      type: String
