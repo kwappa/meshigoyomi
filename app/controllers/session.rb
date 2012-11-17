@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-Meshigoyomi.controllers :user do
+Meshigoyomi.controllers :sessions do
   get :new do
     @page_title = '新規登録'
-    render :'/user/new'
+    render :'/sessions/new'
   end
 
   post :confirm do
@@ -10,10 +10,10 @@ Meshigoyomi.controllers :user do
       @page_title = '新規登録'
       logger.debug @result
       flash[:warning] = '入力項目に誤りがあります。'
-      render :'/user/new'
+      render :'/sessions/new'
     else
       @page_title = '登録情報の確認'
-      render :'/user/confirm'
+      render :'/sessions/confirm'
     end
   end
 

@@ -1,6 +1,6 @@
 <%= partial 'partials/page_top' %>
 <div class="row">
-  <form action="/user/new" method="POST">
+  <form action="<%= url :sessions, :new %>" method="POST">
     <div class="row">
       <div class="four columns"><label class="right inline">user_name</label></div>
       <div class="eight columns">
