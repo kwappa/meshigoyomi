@@ -1,14 +1,6 @@
 <%= partial 'partials/page_top' %>
-
-<div class="row">
-  <div class="six columns top-button">
-    <% if logged_in? %>
-      <a href="<%= url :sessions, :logout %>" onclick="return confirm('ログアウトしますか？');" class="large round login-user button">ログアウト</a>
-    <% else %>
-      <%= partial('partials/login_form') %>
-    <% end %>
-  </div>
-  <div class="six columns top-button">
-    <a href="<%= url :sessions, :new %>" class="large round register-user button">新規登録</a>
-  </div>
-</div>
+<% if logged_in? %>
+  <%= partial('index/logged_in') %>
+<% else %>
+  <%= partial('index/not_logged_in') %>
+<% end %>
