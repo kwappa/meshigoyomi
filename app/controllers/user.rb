@@ -26,12 +26,18 @@ Meshigoyomi.controllers :user do
 
   post :login do
     logger.debug params
-    if (@user = User.authorize_by_params params)
-      name = @user.screen_name.empty? ? @user.screen_name : @user.user_name
+    if (user = User.authorize_by_params params)
+      name = user.screen_name.empty? ? user.user_name : user.screen_name
+      session[:user] = user.attributes
       flash[:info] = "#{name}さん、こんにちは！"
     else
       flash[:warning] = 'ユーザ名かパスワードが違います。'
     end
     redirect url(:index, :index)
  end
+
+  get :logout do
+    session[:user] = nil
+    redirect url(:index, :index)
+  end
 end

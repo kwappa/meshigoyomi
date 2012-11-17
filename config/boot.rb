@@ -8,6 +8,8 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 Bundler.require(:default, PADRINO_ENV)
 
+require 'rack/session/dalli'
+
 ##
 # ## Enable devel logging
 #
@@ -36,6 +38,10 @@ Padrino::Logger::Config[:local]       = { log_level: :devel, stream: :to_file }
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
+  Padrino.use Rack::Session::Dalli, {
+    memcache_server: 'localhost:11211',
+    expires_after: 30.days,
+  }
 end
 
 ##

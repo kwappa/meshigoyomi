@@ -13,6 +13,7 @@ gem 'erubis', "~> 2.7.0"
 gem 'mongo'
 gem 'mongoid'
 gem 'bson_ext', :require => "mongo"
+gem 'dalli'
 
 # Test requirements
 gem 'rr', :group => "test"
