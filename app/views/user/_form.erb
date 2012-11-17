@@ -1,0 +1,55 @@
+<div class="row">
+  <form action="/user/confirm" method="POST">
+    <div class="row">
+      <div class="four columns">
+        <label class="right inline">user_name</label>
+      </div>
+      <div class="eight columns">
+        <%= validation_message :user_name %>
+        <input type="text" class="user-form" name="user_name" value="<%= params['user_name'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <label class="right inline">screen_name</label>
+      </div>
+      <div class="eight columns">
+        <%= validation_message :screen_name %>
+        <input type="text" class="user-form" name="screen_name" value="<%= params['screen_name'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <label class="right inline">mail_address</label>
+      </div>
+      <div class="eight columns" style="border">
+        <%= validation_message :mail_address %>
+        <input type="text" class="user-form" name="mail_address" value="<%= params['mail_address'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <label class="right inline">password</label>
+      </div>
+      <div class="eight columns">
+        <%= validation_message :password %>
+        <input type="password" class="user-form" name="password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <label class="right inline">confirm password</label>
+      </div>
+      <div class="eight columns">
+        <%= validation_message :confirm_password %>
+        <input type="password" class="user-form" name="confirm_password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"></div>
+      <div class="eight columns">
+        <input type="submit" class="large round register-user button" value="入力情報を確認"></input>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,39 @@
+<%= partial 'partials/page_top' %>
+<div class="row">
+  <form action="/user/new" method="POST">
+    <div class="row">
+      <div class="four columns"><label class="right inline">user_name</label></div>
+      <div class="eight columns">
+        <%= h params['user_name'] %>
+        <input type="hidden" name="user_name" value="<%= h params['user_name'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"><label class="right inline">screen_name</label></div>
+      <div class="eight columns">
+        <%= h params['screen_name'] %>
+        <input type="hidden" name="screen_name" value="<%= h params['screen_name'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"><label class="right inline">mail_address</label></div>
+      <div class="eight columns">
+        <%= h params['mail_address'] %>
+        <input type="hidden" name="mail_address" value="<%= h params['mail_address'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"><label class="right inline">password</label></div>
+      <div class="eight columns">
+        <%= '*' * params['password'].length %>
+        <input type="hidden" name="password" value="<%= h params['password'] %>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns"></div>
+      <div class="eight columns">
+        <input type="submit" class="large round register-user button" value="登録する"></input>
+      </div>
+    </div>
+  </form>
+</div>

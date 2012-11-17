@@ -5,3 +5,5 @@ bin/*
 vendor/*
 .sass-cache/*
 .bundle/*
+config/database.yml
+

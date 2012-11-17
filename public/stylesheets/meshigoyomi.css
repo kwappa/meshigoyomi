@@ -14,3 +14,24 @@ div.top-button {
 .register-user.button {
     background-color: limegreen ;
 }
+
+div.flash {
+    padding: 16px;
+    margin:   8px;
+    border: 1px solid silver;
+}
+.flash.warning {
+    background-color: yellow;
+}
+.flash.info {
+    background-color: limegreen;
+}
+.flash.error {
+    background-color: red;
+}
+span.validation-message {
+    padding: 0;
+    margin: 0;
+    font-size: 0.2em;
+    color: red;
+}
