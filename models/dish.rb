@@ -21,4 +21,9 @@ class Dish
   def photo_dirname
     created_at.to_i.to_s.slice(0 .. 3)
   end
+
+  def photo_dir
+    Padrino.root('public', DISH_PHOTO_ROOT, user.user_name, photo_dirname)
+  end
 end
+

@@ -73,6 +73,11 @@ Meshigoyomi.controllers :dishes do
                               title:       params['title'],
                               description: params['description'],
                               )
+    photo_dir  = dish.photo_dir
+    photo_file = File.join(photo_dir, dish.photo_filename)
+    FileUtils.mkdir_p(photo_dir)
+    FileUtils.mv(tupper.uploaded_file, photo_file)
+    FileUtils.chmod(0664, photo_file)
 
     flash[:info] = 'あたらしいごはんを登録しました。'
     redirect :'/dishes/new'
