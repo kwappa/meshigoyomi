@@ -69,7 +69,7 @@ Meshigoyomi.controllers :dishes do
     end
 
     dish = user.dishes.create(
-                              eaten_at:    params['eaten_at'],
+                              eaten_at:    Time.parse(params['eaten_at']),
                               title:       params['title'],
                               description: params['description'],
                               )
