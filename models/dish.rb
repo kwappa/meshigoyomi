@@ -26,4 +26,3 @@ class Dish
     Padrino.root('public', DISH_PHOTO_ROOT, user.user_name, photo_dirname)
   end
 end
-

@@ -71,4 +71,9 @@ class User
     return nil unless digest == user.password_digest
     user
   end
+
+  def dishes_by_range range
+    logger.debug range
+    dishes.where(:eaten_at.gte => range.begin, :eaten_at.lt => range.end).all
+  end
 end

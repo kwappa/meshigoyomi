@@ -97,4 +97,34 @@ describe User do
       its(:attributes) { should == described_class.where(user_name: auth_user).first.attributes }
     end
   end
+
+  describe '#dishes_by_range' do
+    before :all do
+      @user = described_class.create_by_params(valid_user_params.clone.merge('user_name' => 'foouser'))
+      [
+       { eaten_at: Time.new(2012, 10, 31) },
+       { eaten_at: Time.new(2012, 11,  1) },
+       { eaten_at: Time.new(2012, 11, 30) },
+       { eaten_at: Time.new(2012, 12,  1) },
+      ].each { |d| @user.dishes.create(d) }
+    end
+
+    context 'queries for Nov 2012' do
+      let(:nov_range) { DishCalendar.monthly_range(Time.new(2012, 11, 18)) }
+      subject { @user.dishes_by_range nov_range }
+      its(:count) { should == 2 }
+    end
+
+    context 'queries for Oct 2012' do
+      let(:oct_range) { DishCalendar.monthly_range(Time.new(2012, 10, 1)) }
+      subject { @user.dishes_by_range oct_range }
+      its(:count) { should == 1 }
+    end
+
+    context 'queries for Dec 2012' do
+      let(:dec_range) { DishCalendar.monthly_range(Time.new(2012, 12, 1)) }
+      subject { @user.dishes_by_range dec_range }
+      its(:count) { should == 1 }
+    end
+  end
 end
