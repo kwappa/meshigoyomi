@@ -127,4 +127,26 @@ describe User do
       its(:count) { should == 1 }
     end
   end
+
+  describe '#calendar_by_range' do
+    subject { foouser.calendar_by_range nov_range }
+    specify { subject.first.today.should == Date.new(2012, 11,  1) }
+    specify { subject.last.today.should  == Date.new(2012, 11, 30) }
+  end
+
+  describe '.daily_dishes_klass' do
+    let(:dummy_date) { Date.new(2012, 11, 19) }
+    subject { described_class.daily_dishes_klass dummy_date }
+    its(:today) { should == dummy_date }
+    its(:cwday) { should == 1 }
+
+    context 'add new dish' do
+      before do
+        @daily_dishes = described_class.daily_dishes_klass dummy_date
+        @daily_dishes.add 1
+        @daily_dishes.add 2
+      end
+      specify { @daily_dishes.dishes.should == [1,2] }
+    end
+  end
 end

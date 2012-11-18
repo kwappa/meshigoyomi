@@ -79,4 +79,27 @@ class User
                  :eaten_at.lt  => range.end.utc
                  ).all
   end
+
+  def calendar_by_range range
+    calendar  = []
+    first_day = range.begin.localtime.to_date
+    last_day  = range.end.localtime.to_date - 1.day
+
+    calendar[0]  = self.class.daily_dishes_klass first_day
+    calendar[29] = self.class.daily_dishes_klass last_day
+    calendar
+  end
+
+  def self.daily_dishes_klass today
+    dd = OpenStruct.new
+    dd.today = today
+    dd.dishes = []
+    def dd.cwday
+      today.cwday
+    end
+    def dd.add dish
+      dishes.push dish
+    end
+    dd
+  end
 end
