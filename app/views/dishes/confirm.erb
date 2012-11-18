@@ -4,14 +4,14 @@
     <div class="row">
       <div class="four columns"><label class="right inline">タイトル</label></div>
       <div class="eight columns">
-        <%= h params['title'] %>
-        <input type="hidden" name="title" value="<%= params['title'] %>"></input>
+        <p class="dishes-confirm"><%= h params['title'] %></p>
+        <input type="hidden" name="title" value="<%= h params['title'] %>"></input>
       </div>
     </div>
     <div class="row">
       <div class="four columns"><label class="right inline">詳細</label></div>
       <div class="eight columns">
-        <%= h params['description'] %>
+        <div class="dishes-confirm"><%= simple_format(h params['description']) %></div>
         <input type="hidden" name="description" value="<%= h params['description'] %>"></input>
       </div>
     </div>
