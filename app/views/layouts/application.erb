@@ -1,25 +1,29 @@
 <!DOCTYPE html>
+<html lang="ja">
+
 <head>
   <meta charset="utf-8" />
-
   <meta name="viewport" content="width=device-width" />
 
   <title><%= @page_title || 'meshigoyomi' %></title>
 
   <link rel="stylesheet" href="/stylesheets/vendor/foundation.min.css">
+  <link rel="stylesheet" href="/stylesheets/vendor/ui-lightness/jquery-ui-1.9.1.custom.css">
   <link rel="stylesheet" href="/stylesheets/meshigoyomi.css">
 
   <script src="/javascripts/vendor/modernizr.foundation.js"></script>
+  <script src="/javascripts/vendor/foundation.min.js"></script>
+  <script src="/javascripts/vendor/jquery.js"></script>
+  <script src="/javascripts/vendor/jquery-ui-1.9.1.custom.js"></script>
+  <script src="/javascripts/meshigoyomi.js"></script>
 </head>
 
 <body>
-  <script src="/javascripts/vendor/jquery.js"></script>
-  <script src="/javascripts/vendor/foundation.min.js"></script>
-  <script src="/javascripts/meshigoyomi.js"></script>
   <div class="row">
     <div class="twelve columns centerd">
       <%= yield %>
     </div>
   </div>
 </body>
+
 </html>

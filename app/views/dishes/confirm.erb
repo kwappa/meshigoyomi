@@ -1,6 +1,15 @@
 <%= partial 'partials/page_top' %>
 <div class="row">
   <form action="<%= url :dishes, :new %>" method="POST">
+
+    <div class="row">
+      <div class="four columns"><label class="right inline">たべた日</label></div>
+      <div class="eight columns">
+        <p class="dishes-confirm"><%= h params['eaten_at'] %></p>
+        <input type="hidden" name="title" value="<%= h params['eaten_at'] %>"></input>
+      </div>
+    </div>
+
     <div class="row">
       <div class="four columns"><label class="right inline">タイトル</label></div>
       <div class="eight columns">

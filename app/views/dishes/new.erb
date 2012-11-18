@@ -1,7 +1,22 @@
 <%= partial 'partials/page_top' %>
+<script>
+  $(document).ready(function() {
+    $(function() {
+      $("#datepicker").datepicker({
+        inline: true,
+        dateFormat: 'yy/mm/dd'
+      }) ;
+    }) ;
+  }) ;
+</script>
+
 <div class="row">
   <form action="<%= url :dishes, :confirm %>" method="POST" enctype="multipart/form-data">
     <div class="row">
+      <div class="four columns"><label class="right inline">たべた日</label></div>
+      <div class="eight columns">
+        <input type="text" id="datepicker" name="eaten_at" value="<%= params['eaten_at'] %>"></input>
+      </div>
       <div class="four columns"><label class="right inline">タイトル</label></div>
       <div class="eight columns">
         <input type="text" class="user-form" name="title" value="<%= params['title'] %>">
