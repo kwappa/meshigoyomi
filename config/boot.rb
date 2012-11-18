@@ -38,10 +38,11 @@ Padrino::Logger::Config[:local]       = { log_level: :devel, stream: :to_file }
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
-  Padrino.use Rack::Session::Dalli, {
+  session_config = {
     memcache_server: 'localhost:11211',
     expires_after: 30.days,
   }
+  Padrino.use Rack::Session::Dalli, session_config
 end
 
 ##

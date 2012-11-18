@@ -2,22 +2,32 @@
 Meshigoyomi.controllers :dishes do
   get :new do
     @page_title = 'あたらしいごはん'
+    params.merge! get_repare_params
     render :'/dishes/new'
+  end
+
+  get :confirm do
+    params.merge! get_repare_params
+    render :'/dishes/confirm'
   end
 
   post :confirm do
     @page_title = 'あたらしいごはん'
     tupper = prepare_tupper
+    set_repare_params(
+                      eaten_at:    params['eaten_at'],
+                      title:       params['title'],
+                      description: params['description'],
+                      )
 
     if params.fetch('photo', []).empty?
       flash[:warning] = '写真がアップロードされていません。'
-      return render :'/dishes/new'
+      redirect url(:dishes, :new)
     end
 
     begin
       tupper.upload params['photo']
       if %r{jpe?g}i !~ File.extname(tupper.file_info['uploaded_file'])
-        logger.debug tupper.file_info
         tupper.cleanup
         flash[:warning] = "写真はjpegだけですよ"
         redirect url(:dishes, :new)
@@ -35,16 +45,35 @@ Meshigoyomi.controllers :dishes do
 
     if tupper.has_uploaded_file?
       preview_url = File.join('/images', 'tupper', File.basename(tupper.file_info['uploaded_file']))
-      render :'/dishes/confirm', locals: { preview_url: preview_url }
+      session_params = get_repare_params.merge!(preview_url: preview_url)
+      set_repare_params(session_params)
+      redirect url(:dishes, :confirm)
     else
       flash[:warning] = '写真がアップロードされていません。'
-      render :'/dishes/dishes'
+      redirect url(:dishes, :new)
     end
   end
 
   post :new do
     tupper = prepare_tupper
-    logger.debug tupper.file_info
+    unless tupper.has_uploaded_file?
+      flash[:warning] = '写真がアップロードされていません。'
+      redirect url(:dishes, :new)
+    end
+
+    unless (user = fetch_user)
+      tupper.clean_up
+      clear_session
+      flash[:error] = 'ログイン状態が確認できませんでした。'
+      redirect url(:index, :index)
+    end
+
+    dish = user.dishes.create(
+                              eaten_at:    params['eaten_at'],
+                              title:       params['title'],
+                              description: params['description'],
+                              )
+
     flash[:info] = 'あたらしいごはんを登録しました。'
     redirect :'/dishes/new'
   end

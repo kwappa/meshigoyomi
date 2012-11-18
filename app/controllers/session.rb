@@ -8,7 +8,6 @@ Meshigoyomi.controllers :sessions do
   post :confirm do
     unless (@result = User.validate_post_params params).empty?
       @page_title = '新規登録'
-      logger.debug @result
       flash[:warning] = '入力項目に誤りがあります。'
       render :'/sessions/new'
     else
@@ -25,10 +24,9 @@ Meshigoyomi.controllers :sessions do
   end
 
   post :login do
-    logger.debug params
     if (user = User.authorize_by_params params)
       name = user.screen_name.empty? ? user.user_name : user.screen_name
-      session[:user] = user.attributes
+      set_user_info user.attributes
       flash[:info] = "#{name}さん、こんにちは！"
     else
       flash[:warning] = 'ユーザ名かパスワードが違います。'
@@ -37,7 +35,7 @@ Meshigoyomi.controllers :sessions do
  end
 
   get :logout do
-    session[:user] = nil
+    clear_session
     redirect url(:index, :index)
   end
 end

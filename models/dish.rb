@@ -7,5 +7,18 @@ class Dish
   field :eaten_at,          type: Time
   field :title,             type: String
   field :description,       type: String
-  field :original_filename, type: String
+
+  DISH_PHOTO_ROOT = '/dishes'
+
+  def photo_url
+    "#{DISH_PHOTO_ROOT}/#{user.user_name}/#{photo_dirname}/#{photo_filename}"
+  end
+
+  def photo_filename
+    Digest::SHA256.hexdigest(user.user_name + created_at.to_s) + '.jpg'
+  end
+
+  def photo_dirname
+    created_at.to_i.to_s.slice(0 .. 3)
+  end
 end

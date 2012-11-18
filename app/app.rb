@@ -3,7 +3,6 @@ class Meshigoyomi < Padrino::Application
   register Padrino::Mailer
   register Padrino::Helpers
 
-  enable :sessions
   enable :reload unless PADRINO_ENV == 'production'
 
   ##
