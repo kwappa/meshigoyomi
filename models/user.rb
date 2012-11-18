@@ -74,6 +74,9 @@ class User
 
   def dishes_by_range range
     logger.debug range
-    dishes.where(:eaten_at.gte => range.begin, :eaten_at.lt => range.end).all
+    dishes.where(
+                 :eaten_at.gte => range.begin.utc,
+                 :eaten_at.lt  => range.end.utc
+                 ).all
   end
 end
