@@ -4,6 +4,14 @@ require 'spec_helper'
 describe User do
   before :all do
     described_class.delete_all
+    # dummies for range queries
+    foouser = described_class.create_by_params(valid_user_params.clone.merge('user_name' => 'foouser'))
+    [
+     { eaten_at: Time.new(2012, 10, 31) },
+     { eaten_at: Time.new(2012, 11,  1) },
+     { eaten_at: Time.new(2012, 11, 30) },
+     { eaten_at: Time.new(2012, 12,  1) },
+    ].each { |d| foouser.dishes.create(d) }
   end
 
   let(:valid_user_params) {
@@ -76,8 +84,8 @@ describe User do
   end
 
   describe '.authorize_by_params' do
-    let(:auth_user) { 'foo_user' }
-    let(:auth_pass) { 'foo_user_password' }
+    let(:auth_user) { 'auth_user' }
+    let(:auth_pass) { 'auth_user_password' }
     before :all do
       @user = described_class.create_by_params(valid_user_params.clone.merge('user_name' => auth_user, 'password' => auth_pass))
     end
@@ -98,32 +106,24 @@ describe User do
     end
   end
 
-  describe '#dishes_by_range' do
-    before :all do
-      @user = described_class.create_by_params(valid_user_params.clone.merge('user_name' => 'foouser'))
-      [
-       { eaten_at: Time.new(2012, 10, 31) },
-       { eaten_at: Time.new(2012, 11,  1) },
-       { eaten_at: Time.new(2012, 11, 30) },
-       { eaten_at: Time.new(2012, 12,  1) },
-      ].each { |d| @user.dishes.create(d) }
-    end
+  let(:foouser)   { User.where(user_name: 'foouser').first }
+  let(:oct_range) { DishCalendar.monthly_range(Time.new(2012, 10,  1)) }
+  let(:nov_range) { DishCalendar.monthly_range(Time.new(2012, 11, 18)) }
+  let(:dec_range) { DishCalendar.monthly_range(Time.new(2012, 12,  1)) }
 
+  describe '#dishes_by_range' do
     context 'queries for Nov 2012' do
-      let(:nov_range) { DishCalendar.monthly_range(Time.new(2012, 11, 18)) }
-      subject { @user.dishes_by_range nov_range }
+      subject { foouser.dishes_by_range nov_range }
       its(:count) { should == 2 }
     end
 
     context 'queries for Oct 2012' do
-      let(:oct_range) { DishCalendar.monthly_range(Time.new(2012, 10, 1)) }
-      subject { @user.dishes_by_range oct_range }
+      subject { foouser.dishes_by_range oct_range }
       its(:count) { should == 1 }
     end
 
     context 'queries for Dec 2012' do
-      let(:dec_range) { DishCalendar.monthly_range(Time.new(2012, 12, 1)) }
-      subject { @user.dishes_by_range dec_range }
+      subject { foouser.dishes_by_range dec_range }
       its(:count) { should == 1 }
     end
   end
