@@ -87,7 +87,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tupper (1.1.0)
+    tupper (1.1.1)
     tzinfo (0.3.35)
     url_mount (0.2.1)
       rack
