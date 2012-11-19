@@ -85,8 +85,30 @@ class User
     first_day = range.begin.localtime.to_date
     last_day  = range.end.localtime.to_date - 1.day
 
+    # 月初と月末を設定
     calendar[0]  = self.class.daily_dishes_klass first_day
     calendar[29] = self.class.daily_dishes_klass last_day
+
+    # 該当日にdishを突っ込む
+    dishes_by_range(range).each do |dish|
+      today = dish.eaten_at.localtime
+      idx   = today.day - 1
+      dd    = calendar[idx] ||= self.class.daily_dishes_klass(today)
+      dd.add dish
+    end
+
+    # データがない日も日付を入れる
+    calendar.each_with_index do |cal, idx|
+      unless cal
+        calendar[idx] = self.class.daily_dishes_klass first_day + idx.days
+      end
+    end
+
+    # 日曜開始にあわせる
+    (calendar.first.cwday % 7).times do
+      calendar.unshift nil
+    end
+
     calendar
   end
 

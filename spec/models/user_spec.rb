@@ -107,6 +107,7 @@ describe User do
   end
 
   let(:foouser)   { User.where(user_name: 'foouser').first }
+  let(:sep_range) { DishCalendar.monthly_range(Time.new(2012,  9,  1)) }
   let(:oct_range) { DishCalendar.monthly_range(Time.new(2012, 10,  1)) }
   let(:nov_range) { DishCalendar.monthly_range(Time.new(2012, 11, 18)) }
   let(:dec_range) { DishCalendar.monthly_range(Time.new(2012, 12,  1)) }
@@ -129,9 +130,38 @@ describe User do
   end
 
   describe '#calendar_by_range' do
-    subject { foouser.calendar_by_range nov_range }
-    specify { subject.first.today.should == Date.new(2012, 11,  1) }
-    specify { subject.last.today.should  == Date.new(2012, 11, 30) }
+    context 'when range has no data' do
+      subject { foouser.calendar_by_range sep_range }
+      it 'should create blank calendar' do
+        first_day = Date.new(2012,  9,  1)
+        subject[first_day.cwday % 7].today.should == first_day
+        subject.last.today.should  == Date.new(2012,  9, 30)
+        subject.count { |s| s }.should == 30
+
+        30.times do |c|
+          subject[c + 6].today.day.should == c + 1
+        end
+      end
+    end
+
+    context 'when range has some data' do
+      before :all do
+        [
+         { eaten_at: Time.new(2012,  9,  1) },
+         { eaten_at: Time.new(2012,  9,  2), title: '9/2_first' },
+         { eaten_at: Time.new(2012,  9,  2), title: '9/2_second' },
+         { eaten_at: Time.new(2012,  9,  5) },
+        ].each { |d| foouser.dishes.create(d) }
+      end
+      subject { foouser.calendar_by_range sep_range }
+      it 'should create collect calendar' do
+        subject.count { |s| s }.should == 30
+      end
+      it 'should have collect dishes' do
+        subject.find { |s| s && s.today.day == 2 }.dishes.count.should == 2
+      end
+    end
+
   end
 
   describe '.daily_dishes_klass' do
