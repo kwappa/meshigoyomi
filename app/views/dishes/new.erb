@@ -12,6 +12,7 @@
 
 <div class="row">
   <form action="<%= url :dishes, :confirm %>" method="POST" enctype="multipart/form-data">
+
     <div class="row">
       <div class="four columns"><label class="right inline">たべた日</label></div>
       <div class="eight columns">
@@ -22,23 +23,27 @@
         <input type="text" class="user-form" name="title" value="<%= params['title'] %>">
       </div>
     </div>
+
     <div class="row">
       <div class="four columns"><label class="right inline">詳細</label></div>
       <div class="eight columns">
         <textarea class="user-form" name="description"><%= params['description'] %></textarea>
       </div>
     </div>
+
     <div class="row">
       <div class="four columns"><label class="right inline">写真</label></div>
       <div class="eight columns">
         <input type="file" name="photo"></input>
       </div>
     </div>
+
     <div class="row">
       <div class="four columns"></div>
       <div class="eight columns">
         <input type="submit" class="large round register-user button" value="あたらしいごはんを確認"></input>
       </div>
     </div>
+
   </form>
-</form>
+</div>
