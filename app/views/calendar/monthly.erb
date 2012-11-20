@@ -1,0 +1,18 @@
+<%= partial 'partials/page_top' %>
+
+<% calendar.each_with_index do |cal, idx| %>
+  <% if idx % 7 == 0 %>
+    <div class="row">
+    <div class="one column offset-by-one"></div>
+  <% end %>
+  <div class="one column daily-dish <%= cal.cell_class if cal %>"<%= cal.cell_bgstyle if cal %>>
+    <% if cal %>
+      <span class="display-date"><%= cal.display_date %></span>
+    <% end %>
+  </div>
+
+  <% if idx % 7 == 6 || idx + 1 == calendar.length %>
+    <div class="one column end"></div>
+    </div>
+  <% end %>
+<% end %>

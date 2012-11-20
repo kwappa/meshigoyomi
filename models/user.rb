@@ -72,6 +72,10 @@ class User
     user
   end
 
+  def display_name
+    CGI.escapeHTML(screen_name.to_s.empty? ? user_name : screen_name)
+  end
+
   def dishes_by_range range
     logger.debug range
     dishes.where(
@@ -122,6 +126,20 @@ class User
     def dd.add dish
       dishes.push dish
     end
+    def dd.display_date
+      today.strftime('%m/%d')
+    end
+    def dd.cell_class
+      'current-month'
+    end
+    def dd.cell_bgstyle
+      if (dishes || []).count > 0
+        %Q{ style="background-image: url('#{dishes.first.photo_url}');"}
+      else
+        %Q{ style="filter:alpha(opacity=50); opacity:0.5; -moz-opacity:0.5; background-size: 30% auto;" }
+      end
+    end
+
     dd
   end
 end

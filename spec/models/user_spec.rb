@@ -161,7 +161,6 @@ describe User do
         subject.find { |s| s && s.today.day == 2 }.dishes.count.should == 2
       end
     end
-
   end
 
   describe '.daily_dishes_klass' do
@@ -177,6 +176,27 @@ describe User do
         @daily_dishes.add 2
       end
       specify { @daily_dishes.dishes.should == [1,2] }
+    end
+  end
+
+  describe '#display_name' do
+
+    before :all do
+      param = valid_user_params.clone.merge('user_name' => 'noname_user')
+      param.delete('screen_name')
+      User.create param
+      param.merge!('user_name' => 'html_user', 'screen_name' => '<b>strong name</b>')
+      User.create param
+    end
+    context 'if user has no screen_name' do
+      subject { User.where(user_name: 'noname_user').first }
+      its(:screen_name)  { should be_nil }
+      its(:display_name) { should == 'noname_user' }
+    end
+
+    context 'if user has screen_name with HTML special character' do
+      subject { User.where(user_name: 'html_user').first }
+      its(:display_name) { should == "&lt;b&gt;strong name&lt;/b&gt;" }
     end
   end
 end

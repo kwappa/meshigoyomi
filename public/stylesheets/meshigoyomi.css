@@ -48,3 +48,31 @@ span.validation-message {
     -webkit-border-radius: 5px;
     -moz-border-radius:    5px;
 }
+div.daily-dish {
+    max-width:  96px;
+    min-width:  96px;
+    max-height: 96px;
+    min-height: 96px;
+    margin: 2px ;
+    padding: 0 4px ;
+    text-align: right;
+}
+div.current-month {
+    background-image: url('/images/gohan.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 1px solid rgba( 0, 0, 0, .2);
+    margin: 2px ;
+    border-radius:         4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius:    4px;
+    background-size: contain;
+}
+.daily-dish .display-date {
+    text-align: right;
+    background-color: rgba( 255, 255, 255, .7);
+    font-size: 0.3em;
+    border-radius:         2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius:    2px;
+}
