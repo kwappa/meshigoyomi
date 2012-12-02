@@ -1,13 +1,30 @@
 <%= partial 'partials/page_top' %>
 
+<div class="row">
+  <div class="twelve columns calendar-header">
+    <div class="two columns offset-by-two">
+      <a href="<%= @prev_link -%>">←</a>
+    </div>
+
+    <div class="six columns user-profle">
+      <img class="gravatar" src="<%= @user.gravatar_url -%>" alt="<%= @user.display_name -%>">
+      <%= @user.display_name -%>さんの<%= @current_time.year -%>年<%= @current_time.month -%>月のめしごよみ
+    </div>
+
+    <div class="two columns">
+      <a href="<%= @next_link -%>">→</a>
+    </div>
+  </div>
+</div>
+
 <% calendar.each_with_index do |cal, idx| %>
   <% if idx % 7 == 0 %>
     <div class="row">
     <div class="one column offset-by-one"></div>
   <% end %>
-  <div class="one column daily-dish <%= cal.cell_class if cal %>"<%= cal.cell_bgstyle if cal %>>
+  <div class="one column daily-dish <%= cal.cell_class if cal -%>"<%= cal.cell_bgstyle if cal -%>>
     <% if cal %>
-      <span class="display-date"><%= cal.display_date %></span>
+      <span class="display-date"><%= cal.display_date -%></span>
     <% end %>
   </div>
 

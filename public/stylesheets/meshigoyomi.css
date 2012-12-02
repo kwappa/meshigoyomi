@@ -1,10 +1,22 @@
+body {
+    background-image: url('/images/frenchstucco.png');
+}
+img {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+h1.page-top {
+    text-shadow: 2px 2px 4px white ;
+}
+h1.page-top a { color: coral; }
+
 div.main-title,top-button {
     text-align: center ;
 }
 a.button, input.button {
     text-shadow: 1px 1px 4px black ;
 }
-
 div.top-button {
     text-align: center ;
 }
@@ -51,10 +63,10 @@ span.validation-message {
 div.daily-dish {
     max-width:  96px;
     min-width:  96px;
-    max-height: 96px;
-    min-height: 96px;
+    max-height: 72px;
+    min-height: 72px;
     margin: 2px ;
-    padding: 0 4px ;
+    padding: 0;
     text-align: right;
 }
 div.current-month {
@@ -63,15 +75,31 @@ div.current-month {
     background-position: center center;
     border: 1px solid rgba( 0, 0, 0, .2);
     margin: 2px ;
+    border-spacing:0;
     border-radius:         4px;
     -webkit-border-radius: 4px;
     -moz-border-radius:    4px;
-    background-size: contain;
+    background-size: cover;
+    box-shadow: 1px 1px 4px rgba( 0, 0, 0, .1);
 }
 .daily-dish .display-date {
     text-align: right;
     background-color: rgba( 255, 255, 255, .7);
     font-size: 0.3em;
+    margin-right: 2px;
+    border-radius:         2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius:    2px;
+}
+div.calendar-header {
+    min-height: 40px;
+}
+div.calendar-header .user-profile{
+    text-align: center;
+}
+img.gravatar {
+    width:  32px;
+    height: 32px;
     border-radius:         2px;
     -webkit-border-radius: 2px;
     -moz-border-radius:    2px;

@@ -1,7 +1,5 @@
-# Helper methods defined here can be accessed in any controller or view in the application
-
 Meshigoyomi.helpers do
-  # def simple_helper_method
-  #  ...
-  # end
+  def gravatar_url mail_address
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(mail_address)}"
+  end
 end

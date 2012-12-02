@@ -2,7 +2,7 @@
   <div class="twelve columns">
     <ul class="button-group radius even three-up">
       <li><a href="<%= url :dishes, :new %>" class="button radius">あたらしいごはん</a></li>
-      <li><a href="#" class="button radius">カレンダー</a></li>
+      <li><a href="<%= url :calendar, :index, user_info['user_name'] -%>" class="button radius">カレンダー</a></li>
       <li><a href="#" class="button radius">プロフィール</a></li>
     </ul>
   </div>

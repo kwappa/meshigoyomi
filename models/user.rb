@@ -76,6 +76,10 @@ class User
     CGI.escapeHTML(screen_name.to_s.empty? ? user_name : screen_name)
   end
 
+  def gravatar_url 
+   "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest mail_address.to_s}?s=32"
+  end
+
   def dishes_by_range range
     logger.debug range
     dishes.where(
@@ -127,7 +131,7 @@ class User
       dishes.push dish
     end
     def dd.display_date
-      today.strftime('%m/%d')
+      today.strftime('%m/%d').gsub(%r{(^|/)0}, "\\1")
     end
     def dd.cell_class
       'current-month'
