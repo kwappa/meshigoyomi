@@ -63,8 +63,8 @@ span.validation-message {
 div.daily-dish {
     max-width:  96px;
     min-width:  96px;
-    max-height: 72px;
-    min-height: 72px;
+    max-height: 96px;
+    min-height: 96px;
     margin: 2px ;
     padding: 0;
     text-align: right;

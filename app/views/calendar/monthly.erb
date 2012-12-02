@@ -1,5 +1,22 @@
 <%= partial 'partials/page_top' %>
 
+<script>
+$(document).ready(function() {
+    $('a[rel*=lightbox]').lightBox({
+//        overlayBgColor:'#FFF',
+//        overlayOpacity:0.6,
+        imageLoading:  '/images/jquery-lightbox/lightbox-ico-loading.gif',
+        imageBtnClose: '/images/jquery-lightbox/lightbox-btn-close.gif',
+        imageBtnPrev:  '/images/jquery-lightbox/lightbox-btn-prev.gif',
+        imageBtnNext:  '/images/jquery-lightbox/lightbox-btn-next.gif',
+        imageBlank:    '/images/jquery-lightbox/lightbox-blank.gif',
+        containerResizeSpeed:200,
+        txtImage:'ごはん：',
+        txtOf:'/'
+    });
+});
+</script>
+
 <div class="row">
   <div class="twelve columns calendar-header">
     <div class="two columns offset-by-two">
@@ -22,11 +39,14 @@
     <div class="row">
     <div class="one column offset-by-one"></div>
   <% end %>
+
+  <% if cal && cal.has_dish? %><a href="<%= cal.photo_url -%>" title="<%= cal.photo_title -%>" rel="lightbox"><% end %>
   <div class="one column daily-dish <%= cal.cell_class if cal -%>"<%= cal.cell_bgstyle if cal -%>>
     <% if cal %>
       <span class="display-date"><%= cal.display_date -%></span>
     <% end %>
   </div>
+  <% if cal && cal.has_dish? %></a><% end %>
 
   <% if idx % 7 == 6 || idx + 1 == calendar.length %>
     <div class="one column end"></div>

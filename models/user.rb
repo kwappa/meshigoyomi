@@ -138,12 +138,20 @@ class User
     end
     def dd.cell_bgstyle
       if (dishes || []).count > 0
-        %Q{ style="background-image: url('#{dishes.first.photo_url}');"}
+        %Q{ style="background-image: url('#{photo_url}');"}
       else
         %Q{ style="filter:alpha(opacity=50); opacity:0.5; -moz-opacity:0.5; background-size: 30% auto;" }
       end
     end
-
+    def dd.photo_url
+      dishes.first.photo_url
+    end
+    def dd.photo_title
+      dishes.first.title
+    end
+    def dd.has_dish?
+      dishes && dishes.count > 0
+    end
     dd
   end
 end
