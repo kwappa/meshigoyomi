@@ -32,7 +32,7 @@ Meshigoyomi.controllers :sessions do
       flash[:warning] = 'ユーザ名かパスワードが違います。'
     end
     redirect url(:index, :index)
- end
+  end
 
   get :logout do
     clear_session

@@ -15,10 +15,10 @@ Meshigoyomi.controllers :dishes do
     @page_title = 'あたらしいごはん'
     tupper = prepare_tupper
     set_repare_params(
-                      eaten_at:    params['eaten_at'],
-                      title:       params['title'],
-                      description: params['description'],
-                      )
+      eaten_at:    params['eaten_at'],
+      title:       params['title'],
+      description: params['description'],
+    )
 
     if params.fetch('photo', []).empty?
       flash[:warning] = '写真がアップロードされていません。'
@@ -69,10 +69,10 @@ Meshigoyomi.controllers :dishes do
     end
 
     dish = user.dishes.create(
-                              eaten_at:    Time.parse(params['eaten_at']),
-                              title:       params['title'],
-                              description: params['description'],
-                              )
+      eaten_at:    Time.parse(params['eaten_at']),
+      title:       params['title'],
+      description: params['description'],
+    )
     photo_dir  = dish.photo_dir
     photo_file = File.join(photo_dir, dish.photo_filename)
     FileUtils.mkdir_p(photo_dir)
